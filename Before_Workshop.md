@@ -1,20 +1,10 @@
 ---
-output:
-  word_document: default
-  html_document: default
-  pdf_document: default
+title: "TIES 2023 Reproducibility Workshop"
+output: pdf_document
+date: "2023-07-21"
 ---
-## SSC 2022 Reproducibility Workshop
 
-### Join our Slack Community
-
-We are using the Statistical Education Section's Slack as a home for
-this workshop, and the follow-ups afterward. You can join this Slack
-[for
-free](https://join.slack.com/t/sscstatistics-2n57302/shared_invite/zt-roolxsm8-RXc3rjbi~BMyzutPL8UJ9w),
-and we encourage you to hop on and then join the
-ses2022workshop-reproducibility channel. Both Tiffany and Wesley will
-be in the channel before/during/after the workshop.
+## TIES 2023 Reproducibility Workshop
 
 ### Local Installation
 
@@ -22,8 +12,8 @@ Before the workshop, if you want to work on your own computer and your
 own file system, you should complete the following steps.
 
 1.  Update your version of R locally to at least 4.0, preferably
-    [4.2.0](https://cran.r-project.org/).
-2.  Update your version of RStudio locally to at least 2022.02, to match
+    [4.3.1](https://cran.r-project.org/).
+2.  Update your version of RStudio locally to at least 2023.06, to match
     the flow we will show.
 3.  Install Git locally ([Windows](https://git-for-windows.github.io/);
     [Mac](https://ubc-mds.github.io/resources_pages/install_ds_stack_mac/#git/) - note that
@@ -34,13 +24,9 @@ environment, you will need to register for a GitHub account (below).
 
 ### Server Environment
 
-An account has been created for you on Wesley's RStudio
-Workbench/Server, as ses hyphen first initial + last name (e.g.,
-ses-wburr). The password for all accounts has been set to the password
-provided to you via the contact email. If you login to the provided URL,
-you will be presented with the RStudio interface, and you can create a
-new project or configure your interface as we will discuss during the
-workshop.
+If you don't have a convenient laptop to work on, please ping me
+and I will set you up a temporary account on RStudio Server Professional,
+so you can follow along and try things.
 
 ### Either Way ...
 

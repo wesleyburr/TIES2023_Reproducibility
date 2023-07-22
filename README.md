@@ -40,4 +40,4 @@ development + IT operations) like tools for  compute environment managment.
 ### Links
 
 * The [Before Workshop](Before_Workshop.pdf) instructions
-* The [slide deck](TIES2023_Reproducibility.html)
+* The [slide deck](http://bit.ly/TIES2023_Reproducibility)

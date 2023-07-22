@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Importance of Reproducible Coding Habits</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Wesley Burr (Trent)" />
+    <meta name="date" content="2023-07-21" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: top, left, title-slide
+
+.title[
+# Importance of Reproducible Coding Habits
+]
+.subtitle[
+## TIES 2023 Reproducibility workshop
+]
+.author[
+### Wesley Burr (Trent)
+]
+.date[
+### 2023-07-21
+]
+
+---
+
+
+
+
+
+
+## Reproducible Research through Coding Habits
+
+In order to ensure research outputs are robust, and to maximize the time,
+money, blood, sweat, and tears that went into them, for future researchers
+and for society in general, it is critical that we share the underlying
+code and data. This allows for replicability of results, and is part
+of **computational reproducibility**.
+
+---
+
+## Have You Ever ...
+
+Karl -- this is very interesting ,
+however you used an old version of
+the data (n=143 rather than n=226).
+I'm really sorry you did all that
+work on the incomplete dataset.
+- Bruce
+
+*[Source](https://www.biostat.wisc.edu/~kbroman/presentations/repro_research_JSM2016.pdf) from a talk at JSM 2016 by Karl Broman - I was actually there in person*
+
+---
+
+## Have You Ever ...
+
+Reviewers come back with some positive feedback for your paper,
+but ask that you check something in one of the model runs. When you go to do
+so ... nothing matches the output in the paper. Not the figures, not the tables,
+not the results. What happened??!?
+
+---
+
+## Have You Ever ...
+
+"Your script is giving me an error when I run it on my computer."
+- Your Collaborator (*who you used to like*)
+    - or your computer-unsavvy PhD supervisor?
+
+---
+
+## Have You Ever ...
+
+&lt;img src="img/03-version-control-intro/phdcomicid1531.png" width="36%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## So Why is Is Reproducibility in Coding Important?
+
+- your personal sanity
+
+--
+
+- the great scientific endeavor
+
+--
+
+- having things "just work", like you expect
+
+--
+
+- avoiding embarrassment
+
+---
+
+## Listen to some others ...
+
+File organization and naming is a mighty weapon against chaos
+- Jenny Bryan
+
+---
+
+##  Listen to some others ...
+
+You mostly collaborate with yourself, 
+and me-from-two-months-ago never responds to email.
+- Mark Holder
+
+---
+
+##  Listen to some others ...
+
+Dear past-Hadley: PLEASE COMMENT YOUR CODE BETTER. Love present-Hadley
+
+— [@hadleywickham](https://twitter.com/hadleywickham/status/718203628528349184)
+
+---
+
+##  Listen to some others ...
+
+The most important tool for Reproducible Research is the mindset, when starting, that the end product will be reproducible.
+- [Keith Baggerly](https://twitter.com/kwbroman/status/667735926915731457)
+
+---
+
+class: inverse
+
+## Basic Principles
+
+Basic principles
+
+Step 1: slow down and document.&lt;br/&gt;
+Step 2: have sympathy for your future self.&lt;br/&gt;
+Step 3: have a system.&lt;br/&gt;
+
+- [Karl Broman, UW-Madison](https://kbroman.org/Tools4RR/assets/lectures/06_org_eda_withnotes.pdf)
+
+---
+
+## Tips for Getting Started in Small Ways
+
+- force yourself to organize your current project in some kind of coherent manner
+
+--
+
+- use Git to store your materials (make them available freely, if you can!) - more soon
+
+--
+
+- create slides for your conference talks / brown bag lunches / lab meetings in R Markdown,
+Quarto, or an equivalent framework
+
+--
+
+- add one piece of the puzzle with each subsequent project
+
+--
+
+- think of all of your outputs as code (including teaching, if you do it!)
+
+---
+
+## A Personal Example
+
+I write all of my slides for my big classes in R Markdown. They are knit
+as part of a project, and the entire course is a Git repository. This has
+a number of advantages:
+
+- all slides can be publicly available
+
+--
+
+- it is very easy to update a course website (build -&gt; commit -&gt; push)
+
+--
+
+- I never lose old slides - they're all on GitHub
+
+--
+
+- it is trivial to cross-link from lecture to lecture, or to reuse material without making multiple copies
+
+--
+
+- I do a lot of teaching; this gives me some reinforcement 'science' skills
+while also working on that other aspect of my life
+
+---
+
+## The lectures are code!
+
+Depending on how computational your statistics/science world is, this may not
+fully sink in. What is **code**?
+
+--
+
+- all text (ASCII or UTF)
+
+--
+
+- editable in any environment, on any computer
+
+--
+
+- rendered in some way to form a final product
+
+--
+
+- trivially versionable
+
+--
+
+Compare this to, e.g., a **pptx** (Microsoft Office - Powerpoint). 
+Have you ever tried to open a pptx file in anything **but** Powerpoint? 
+Or in anything but a slide editor (e.g., Notepad)?
+
+---
+
+## Tool: usethis
+
+Building good coding habits (and everything is code!) is important. You need
+to think of every action or step you take as being something that potentially
+will cause you a problem in the future. If you find yourself doing something
+manually once ... you'll probably do it manually 100x unless you fix the
+design pattern.
+
+**usethis** is a [package for R](https://cran.r-project.org/web/packages/usethis/index.html) developed by folks at RStudio that tries to
+help with common tasks that get repeated often.
+
+---
+
+## Tool: usethis
+
+Some common tasks that can be handled with this package:
+
+- setting up Git credentials
+
+--
+
+- create a project from a repo
+
+--
+
+- open/edit R configuration files
+
+--
+
+- interact with a Git repo (branches, commits, etc.)
+
+--
+
+- work with projects or packages
+
+---
+
+## Tool: here
+
+The goal of the **here** package is to enable easy file referencing in project-oriented
+workflows. In contrast to using **setwd()**, which is fragile and dependent on the 
+way you organize your files, **here** uses the top-level directory of a project 
+to easily build paths to files.
+
+---
+
+## Tool: here
+
+&lt;img src="img/02-importance-of-reproducibility/02-here.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+Illustration by [Allison Horst](https://github.com/allisonhorst)
+
+---
+
+## Tool: here
+
+The key to **here** is something that can be done manually, but is really important:
+machine portability. Fragile things like **setwd()** Do. Not. Work. when transferring
+data/code/analyses/projects across different computational environments. 
+
+This is especially bad when going from architecture to architecture - for example,
+from a Windows machine to a Mac OS or Linux machine, or vice versa. 
+
+Using **here** for all File Input/Output actions forces compatibility, and 
+encourages you to think about your organization structure in a way which is
+conducive to computational reproducibility. 
+
+---
+
+## Coming Up Next
+
+In the next session, we will dive into a version of what we have
+been calling **version control** called **Git** (first developed by
+Linus Torvalds, of the Linux and Linux kernel fame), and introduce the concepts 
+necessary to get started. 
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

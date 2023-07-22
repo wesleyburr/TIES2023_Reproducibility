@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>What is Reproducibility?</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Wesley Burr (Trent)" />
+    <meta name="date" content="2023-07-21" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: top, left, title-slide
+
+.title[
+# What is Reproducibility?
+]
+.subtitle[
+## TIES 2023 Reproducibility Workshop
+]
+.author[
+### Wesley Burr (Trent)
+]
+.date[
+### 2023-07-21
+]
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Background: Reproducibility
+
+
+
+---
+
+## Reproducibility 
+
+In this workshop, we are specifically interested in discussing ways in which to encourage
+students (and professionals, and faculty!) to develop skills and habits for strong
+reproducible research *methods*, particularly with 
+respect to their data gathering, manipulation, and analysis. 
+
+---
+
+## Reproducible Research Methods
+
+The first published work we are aware of that discusses the specific framework we are
+thinking of (computational reproducibility) is 1990-92, J. Claerbout 
+at Stanford:
+
+&lt;br/&gt;
+
+**J. Claerbout, M. Karrenbach**, *Electronic documents give reproducible research a new meaning*, in Proceedings of the 62nd Annual International Meeting of the Society of Exploration Geophysics, New Orleans, USA, 25 to 29 October 1992.
+
+( referenced by David Donoho in [1995](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.53.6201) )
+---
+
+class: inverse
+
+## Reproducible Research Methods
+
+Some quotes:
+
+&lt;br/&gt;
+- a revolution in education and technology transfer follows from the marriage of word processing and software command scripts
+
+--
+
+- researchers ... can reproduce their own research results a year or more later by "pressing a single button"
+
+--
+
+- Our basic goal is reproducible research. The electronic document is our means to this end
+
+--
+
+&lt;br/&gt;
+https://doi.org/10.1190/1.1822162
+
+---
+
+## Definition
+
+&lt;br/&gt;
+... the idea that scientific results should be documented in such a way that their deduction is fully transparent. This requires a detailed description of the methods used to obtain the data and making the full dataset and the code to calculate the results easily accessible.
+**This is the essential part of open science.**
+
+&lt;br/&gt;
+*Wikipedia, https://en.wikipedia.org/wiki/Reproducibility*
+
+---
+
+## Some Necessary Components
+
+To make any research project **computationally** reproducible
+
+- all data and files should be clearly: separated; labelled; documented
+    
+--
+
+- all operations should be automated as much as practicable, avoiding manual intervention 
+
+--
+
+- workflow should be designed as a sequence of steps (**scripts!**), combined so intermediate outputs from one step directly feed in as inputs to the next
+
+--
+
+- version control should be used
+
+---
+
+## Workflow Includes
+
+- data acquisition
+
+--
+
+- data processing
+    - entry
+    - manipulation
+    - filtering
+
+--
+
+- data analysis
+    - computation of statistics
+    - figures
+    - model-fitting (including interim steps!) - avoid The Garden of Forking Paths!
+    - linear flow, resist urge to modify earlier steps (HARKing)
+
+---
+
+## Researcher Point of View
+
+I  strongly endorse **Data Carpentry**, a program of workshops teaching scientists
+basic skills in this sort of thinking.
+
+&lt;br/&gt;
+If you do this kind of process for your research (and if you do statistics
+as a primary focus, or as a tool in your research,  you *should*!), to do that
+research properly, you have to know how to do this kind of thing!
+
+&lt;br/&gt;
+*Medice, cura te ipsum (Physician, heal thyself)*
+
+&lt;br/&gt;
+https://datacarpentry.org/
+
+---
+
+class: inverse
+
+## Some Good References to Get Started
+
+Materials for a 3-hour Workshop on R Markdown: [R Markdown Training](https://hbctraining.github.io/Training-modules/Rmarkdown/) &lt;br/&gt;
+The Data Carpentry Initiative: [Data Carpentry](https://datacarpentry.org/) &lt;br/&gt;
+A Coursera Course: [Reproducible Research with R Markdown](https://www.coursera.org/learn/reproducible-research) &lt;br/&gt;
+The Book: [R Markdown, the Definitive Guide](https://bookdown.org/yihui/rmarkdown/) &lt;br/&gt;
+
+&lt;br/&gt;&amp;nbsp;&lt;br/&gt;
+
+[Reproducible Science Curriculum](https://github.com/Reproducible-Science-Curriculum/)&lt;br/&gt;
+Drs. Goodman, Fanelli, Ioannidis [What does research reproducibility mean?](https://stm.sciencemag.org/content/8/341/341ps12#ref-4)&lt;br/&gt;
+IEEE [Special Issue on Reproducible Research](https://ieeexplore.ieee.org/document/4720217)&lt;br/&gt;
+[Reproducible Science Curriculum](https://github.com/Reproducible-Science-Curriculum/)&lt;br/&gt;
+Dr. Mine Çetinkaya-Rundel, [Teaching R, 5 Principles](https://mine-cetinkaya-rundel.github.io/2021-teach-r-five-principles-liverpool/)&lt;br/&gt;
+
+---
+
+class: inverse
+
+## Some Newer References (last 18 months)
+
+* [Building Reproducible Analytical Pipelines with R](https://leanpub.com/raps-with-r/)
+    - book also available for [free](https://raps-with-r.dev/)
+    - some [slides](https://64a7f00fce57ea61a8302dd5--stellar-bublanina-8574b2.netlify.app/#/title-slide) talking about this book and its themes
+* [The five pillars of computational reproducibility](https://osf.io/4pd9n/)
+
+Some good posts talking about issues raised today:
+* [renv, Docker, and GitHub Actions](http://haines-lab.com/post/2022-01-23-automating-computational-reproducibility-with-r-using-renv-docker-and-github-actions/)
+* [Perspective from a psychologist, organizing his lab](https://www.lornecampbell.org/?p=171)
+* [Some good practices for research with R](https://www.good-practices.etiennebacher.com/#/title-slide)
+
+A good course, all on GitHub, that can take you much deeper:
+* [Course from JHU School of Public Health](https://www.stephaniehicks.com/jhustatprogramming2022/schedule)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

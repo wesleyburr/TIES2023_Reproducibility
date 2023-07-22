@@ -1,0 +1,208 @@
+---
+title: "What is Reproducibility?"
+subtitle: "TIES 2023 Reproducibility Workshop"  
+author: 
+  - "Wesley Burr (Trent)"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: '%current%'
+      titleSlideClass: [top, left]
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(message = FALSE, 
+                      echo = FALSE, 
+                      warning = FALSE,
+                      fig.align = "center")
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#9F999C",
+  secondary_color = "#FFE5F3",
+  inverse_header_color = "#8F8C8E",
+  link_color = "deeppink",
+  title_slide_text_color = "#3d3d3d",
+  title_slide_background_image = "img/title-slide-background-light.png",
+  title_slide_background_position = "left",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+class: center, middle
+
+# Background: Reproducibility
+
+```{r include=FALSE}
+library(ggplot2)
+filter <- dplyr::filter
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.width=10.5, fig.height=4, 
+  comment=NA, rows.print=16)
+#theme_set(theme_gray(base_size = 24))
+```
+
+---
+
+## Reproducibility 
+
+In this workshop, we are specifically interested in discussing ways in which to encourage
+students (and professionals, and faculty!) to develop skills and habits for strong
+reproducible research *methods*, particularly with 
+respect to their data gathering, manipulation, and analysis. 
+
+---
+
+## Reproducible Research Methods
+
+The first published work we are aware of that discusses the specific framework we are
+thinking of (computational reproducibility) is 1990-92, J. Claerbout 
+at Stanford:
+
+<br/>
+
+**J. Claerbout, M. Karrenbach**, *Electronic documents give reproducible research a new meaning*, in Proceedings of the 62nd Annual International Meeting of the Society of Exploration Geophysics, New Orleans, USA, 25 to 29 October 1992.
+
+( referenced by David Donoho in [1995](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.53.6201) )
+---
+
+class: inverse
+
+## Reproducible Research Methods
+
+Some quotes:
+
+<br/>
+- a revolution in education and technology transfer follows from the marriage of word processing and software command scripts
+
+--
+
+- researchers ... can reproduce their own research results a year or more later by "pressing a single button"
+
+--
+
+- Our basic goal is reproducible research. The electronic document is our means to this end
+
+--
+
+<br/>
+https://doi.org/10.1190/1.1822162
+
+---
+
+## Definition
+
+<br/>
+... the idea that scientific results should be documented in such a way that their deduction is fully transparent. This requires a detailed description of the methods used to obtain the data and making the full dataset and the code to calculate the results easily accessible.
+**This is the essential part of open science.**
+
+<br/>
+*Wikipedia, https://en.wikipedia.org/wiki/Reproducibility*
+
+---
+
+## Some Necessary Components
+
+To make any research project **computationally** reproducible
+
+- all data and files should be clearly: separated; labelled; documented
+    
+--
+
+- all operations should be automated as much as practicable, avoiding manual intervention 
+
+--
+
+- workflow should be designed as a sequence of steps (**scripts!**), combined so intermediate outputs from one step directly feed in as inputs to the next
+
+--
+
+- version control should be used
+
+---
+
+## Workflow Includes
+
+- data acquisition
+
+--
+
+- data processing
+    - entry
+    - manipulation
+    - filtering
+
+--
+
+- data analysis
+    - computation of statistics
+    - figures
+    - model-fitting (including interim steps!) - avoid The Garden of Forking Paths!
+    - linear flow, resist urge to modify earlier steps (HARKing)
+
+---
+
+## Researcher Point of View
+
+I  strongly endorse **Data Carpentry**, a program of workshops teaching scientists
+basic skills in this sort of thinking.
+
+<br/>
+If you do this kind of process for your research (and if you do statistics
+as a primary focus, or as a tool in your research,  you *should*!), to do that
+research properly, you have to know how to do this kind of thing!
+
+<br/>
+*Medice, cura te ipsum (Physician, heal thyself)*
+
+<br/>
+https://datacarpentry.org/
+
+---
+
+class: inverse
+
+## Some Good References to Get Started
+
+Materials for a 3-hour Workshop on R Markdown: [R Markdown Training](https://hbctraining.github.io/Training-modules/Rmarkdown/) <br/>
+The Data Carpentry Initiative: [Data Carpentry](https://datacarpentry.org/) <br/>
+A Coursera Course: [Reproducible Research with R Markdown](https://www.coursera.org/learn/reproducible-research) <br/>
+The Book: [R Markdown, the Definitive Guide](https://bookdown.org/yihui/rmarkdown/) <br/>
+
+<br/>&nbsp;<br/>
+
+[Reproducible Science Curriculum](https://github.com/Reproducible-Science-Curriculum/)<br/>
+Drs. Goodman, Fanelli, Ioannidis [What does research reproducibility mean?](https://stm.sciencemag.org/content/8/341/341ps12#ref-4)<br/>
+IEEE [Special Issue on Reproducible Research](https://ieeexplore.ieee.org/document/4720217)<br/>
+[Reproducible Science Curriculum](https://github.com/Reproducible-Science-Curriculum/)<br/>
+Dr. Mine Çetinkaya-Rundel, [Teaching R, 5 Principles](https://mine-cetinkaya-rundel.github.io/2021-teach-r-five-principles-liverpool/)<br/>
+
+---
+
+class: inverse
+
+## Some Newer References (last 18 months)
+
+* [Building Reproducible Analytical Pipelines with R](https://leanpub.com/raps-with-r/)
+    - book also available for [free](https://raps-with-r.dev/)
+    - some [slides](https://64a7f00fce57ea61a8302dd5--stellar-bublanina-8574b2.netlify.app/#/title-slide) talking about this book and its themes
+* [The five pillars of computational reproducibility](https://osf.io/4pd9n/)
+
+Some good posts talking about issues raised today:
+* [renv, Docker, and GitHub Actions](http://haines-lab.com/post/2022-01-23-automating-computational-reproducibility-with-r-using-renv-docker-and-github-actions/)
+* [Perspective from a psychologist, organizing his lab](https://www.lornecampbell.org/?p=171)
+* [Some good practices for research with R](https://www.good-practices.etiennebacher.com/#/title-slide)
+
+A good course, all on GitHub, that can take you much deeper:
+* [Course from JHU School of Public Health](https://www.stephaniehicks.com/jhustatprogramming2022/schedule)

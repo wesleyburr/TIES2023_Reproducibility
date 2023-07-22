@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Shippable and Shareable Computational Environments</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Wesley Burr (Trent)" />
+    <meta name="date" content="2023-07-21" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: top, left, title-slide
+
+.title[
+# Shippable and Shareable Computational Environments
+]
+.subtitle[
+## TIES 2023 Reproducibility Workshop
+]
+.author[
+### Wesley Burr (Trent)
+]
+.date[
+### 2023-07-21
+]
+
+---
+
+
+
+
+
+
+class: center, middle
+
+&gt; *You mostly collaborate with yourself, 
+&gt; and me-from-two-months-ago never responds to email.*
+  &gt; 
+  &gt; --Mark T. Holder
+
+---
+
+class: middle
+
+## Why shippable and shareable computational environments
+
+To reliably be able to reproduce an data analysis, 
+we usually need more than the code and the data...
+
+We need the software to run the code, and the correct versions of that software!
+  This software can include:
+  
+  - programming languages (e.g., R, Python, Julia, etc)
+- packages from programming languages (e.g., `tidyverse`, `tidymodels`, etc)
+- other tools you rely on (e.g., GNU Make)
+- legacy code (e.g., Perl scripts, Fortran, etc)
+
+---
+
+class: middle
+
+## What are my options for creating shippable and shareable computational environments?
+
+There are many software tools available to do this, 
+and these fall under three general umbrellas:
+  
+  1. **Virtual environments (e.g., `renv`, `conda`)**
+  
+  2. Containerization (e.g., `Docker`, `Singularity`)
+
+3. Virtual machines (e.g., VirtualBox, Amazon Machine Instance)
+
+&gt; These three umbrellas are split upon the level of where virtualization
+&gt; is performed on the computer. 
+&gt; With virtual environments being at the highest level (application),
+&gt; containerization being in the middle (operating system user-space),
+&gt; and virtual machines being at the lowest level (hardware).
+
+---
+
+class: middle
+
+.pull-left[
+  ## Virtual environments
+  
+  - let you have multiple versions of programming languages packages, 
+  and other programs on the same computer, 
+  while keeping them isolated so they do not create conflicts with each other.
+  
+  - most have a sharing functionality which aids in making data science projects reproducible
+  
+  - when using R and RStudio, 
+  [`renv`](https://rstudio.github.io/renv/articles/renv.html) is one of the most popular choices for virtual environment software
+]
+
+.pull-right[
+  &lt;img src="img/04-shareable-compute/renv-logo.png" width="70%" style="display: block; margin: auto auto auto 0;" /&gt;
+  
+  *Source: https://github.com/rstudio/renv*
+    
+]
+
+---
+
+class: inverse, center, middle
+
+## Attribution:
+
+.pull-left[
+  Much of the documentation in this hands-on portion of the workshop &lt;br&gt;
+    comes from the excellent `renv` website: https://rstudio.github.io/renv/
+    
+The website and the `renv` package is written and maintained by [Kevin Ushey](https://kevinushey.github.io/).
+]
+
+.pull-right[
+  &lt;img src="https://kevinushey.github.io/img/kevin.jpg" width=200&gt;
+]
+
+
+---
+
+class: middle
+
+## General workflow
+
+The general workflow when working with renv is:
+  
+  1. Call `renv::init()` to initialize a new project-local environment with a private R library,
+
+2. Work in the project as normal, installing and removing new R packages as they are needed in the project,
+
+3. Call `renv::snapshot()` to save the state of the project library to the lockfile (called `renv.lock`),
+
+4. Continue working on your project, installing and updating R packages as needed.
+
+5. Call `renv::snapshot()` again to save the state of your project library if your attempts to update R packages were successful, or call `renv::restore()` to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.
+
+---
+
+class: middle
+
+## Infrastructure
+
+The following files are written to and used by projects using `renv`:
+  
+  | **File**            | **Usage**                                                                           |
+  | -----------------   | ----------------------------------------------------------------------------------- |
+  | `.Rprofile`         | Used to activate `renv` for new R sessions launched in the project.                 |
+  | `renv.lock`         | The lockfile, describing the state of your project's library at some point in time. |
+| `renv/activate.R`   | The activation script run by the project `.Rprofile`.                               |
+| `renv/library`      | The private project library.                                                        |
+| `renv/settings.dcf` | Project settings -- see `?settings` for more details.                               |
+
+&gt; For development and collaboration, the `.Rprofile`, `renv.lock` 
+and `renv/activate.R` files should be committed to your version control system
+
+---
+
+class: middle
+
+## Setting up `renv`
+
+### Installation
+
+- As `renv` is an R package, 
+we can install it using using our familiar R package installation workflow:
+
+
+```r
+install.packages("renv")
+```
+
+---
+
+class: middle
+
+## Using a project where `renv` is already setup
+
+If a collaborator has already setup an `renv` environment for the project,
+you can leverage this to ensure you use the dependencies, 
+and versions of those dependencies, as your collaborator 🙌
+
+### Workflow 
+
+1. Get a copy of the project (i.e., clone it from GitHub).
+
+2. Open RStudio to the project working directory 
+by double-clicking on the `*.Rproject` file.
+
+3. Run `renv::restore()` to restore the project library locally on your machine.
+
+4. Get to work!
+
+---
+
+class: middle
+
+## Let's try it out!
+  
+  1. Click the green "Use this template" button in 
+[this repository](https://github.com/ttimbers/renv-demo) 
+to obtain a copy of it for yourself.
+
+2. Clone this repository to your computer.
+
+3. Open RStudio to the project working directory 
+by double-clicking on the `*.Rproject` file.
+
+4. Run `renv::restore()` to restore the project library locally on your machine.
+
+5. Click the "Knit" button to run the code and reproduce the analysis!
+  
+---
+
+class: middle
+
+## Anatomy of a `renv.lockfile`
+
+`renv.lockfile` captures the state of your library at some point in time, 
+recording:
+  
+  - The version of `renv` used when generating the `renv.lockfile`;
+- The version of R used in that project;
+- The R repositories that were active when the lockfile was created;
+- Package records defining each R package, their version, and their installation source.
+
+---
+
+class: middle
+
+## Anatomy of a `renv.lockfile`
+
+Here is an example lockfile which includes R and the package `markdown`:
+  
+  ```
+{
+  "R": {
+    "Version": "4.2.0",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
+  },
+  "Packages": {
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4584a57f565dd7987d59dda3a02cfb41"
+    }
+  }
+}
+```
+
+---
+
+class: middle
+
+### Updating an `renv` environment
+
+A common task you will need to do when you collaborate 
+is to update an `renv` environment as you add dependencies to your project.
+
+### Workflow
+
+1. Work in the project as normal, installing and removing new R packages as they are needed in the project.
+
+2. Call `renv::snapshot()` to save the state of the project library 
+to the lockfile (called `renv.lock`).
+
+3. Commit the changes to `renv.lock` (and your changed code!) 
+to local version control,
+and push the changes to your remote version control repository 
+to share your environment with your collaborators.
+
+---
+
+class: middle
+
+## Let's try it out!
+
+- Install the [`statquotes`](https://github.com/friendly/statquotes) 
+R package via:
+  
+
+```r
+install.packages("statquotes")
+```
+
+- Add the following code to the code chunk on line 16 of `star-wars.Rmd`:
+  
+
+```r
+library(statquotes)
+as.markdown(search_quotes("environment"))
+```
+
+- Call `renv::snapshot()` to save the state of the project library to the lockfile (called `renv.lock`).
+
+Examine the `renv.lock` file. 
+You should see something like this near line 381 of the `renv.lock` file:
+  
+  ```
+"statquotes": {
+  "Package": "statquotes",
+  "Version": "0.2.6",
+  "Source": "Repository",
+  "Repository": "CRAN",
+  "Hash": "d771dc735b1829ff511855197fc4c107",
+  ```
+  
+  - To share the changes to the environment, 
+  commit the changes to the `renv.lockfile` 
+  and push them to your remote version control repository.
+  
+---
+
+class: middle
+  
+### Creating an `renv` environment from scratch
+  
+What if a collaborator hasn't setup an environment for you, 
+you then need to set it up yourself! 
+
+### Workflow 
+
+1. Setup a repository on GitHub and clone it to your local machine. 
+
+2. Setup an RStudio project in your project's home directory 
+  (can skip depending how you did step 1 - as this might have already happened)
+  
+3. Run `renv::init()` to initialize a new project-local environment with a private R library
+  
+4. Work in the project as normal, installing and removing new R packages as they are needed in the project.
+  
+5. Call `renv::snapshot()` to save the state of the project library to the lockfile (called `renv.lock`).
+  
+6. Put the `.Rprofile`, `renv.lock` and `renv/activate.R` files under local 
+  and remote version control to share your environment with your collaborators.
+  
+---
+
+class: middle
+  
+## Let's try it out!
+  
+1. Click the green "Use this template" button in 
+  [this repository](https://github.com/ttimbers/no-renv-project) 
+  to obtain a copy of it for yourself.
+  
+2. Clone this repository to your computer using RStudio's version control tools.
+
+3. Examine `script.r` to see what packages the project depends on.
+
+4. Run `renv::init()` to initialize a new project-local 
+environment with a private R library.
+
+5. Put the `.Rprofile`, `renv.lock` and `renv/activate.R` files under local 
+and remote version control.
+
+Examine the `renv.lock` file - 
+do the packages there match what you saw at the top of `script.r` - 
+that's neat... How does that work???
+    
+---
+
+class: middle
+  
+### Dependency Discovery
+  
+- By default, `renv::snapshot()` will examine your project’s R files to determine which packages are used in your project, and will include only those packages (alongside their recursive dependencies) in the lockfile. 
+  
+- renv does this by scanning your code for calls to `library()` or `require()`.
+  
+---
+
+class: middle
+  
+### Other neat things you can do with `renv`
+  
+- update all packages in a project library are updated to the  latest-available versions via `renv::update()`
+  
+- use a `DESCRIPTION` file 
+  to explicitly declare which packages are used in your project 
+  (see [docs](https://rstudio.github.io/renv/articles/renv.html#explicit-snapshots))
+              
+     - pair with a Python version and Python virtual environment 
+              (see [docs](https://rstudio.github.io/renv/articles/python.html))
+              
+     - and more! [Read the docs!](https://rstudio.github.io/renv/index.html)
+              
+---
+
+### References
+                
+Ushey K (2022). renv: Project Environments. R package version 0.15.5, https://rstudio.github.io/renv/
+                
+Timbers, T.A., Ostblom, J., D’Andrea, F., Lourenzutti, R. (2022). Reproducible and Trustworthy Workflows for Data Science. https://ubc-dsci.github.io/reproducible-and-trustworthy-workflows-for-data-science/
+                
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

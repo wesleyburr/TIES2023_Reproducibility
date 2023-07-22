@@ -1,0 +1,311 @@
+---
+title: "Importance of Reproducible Coding Habits"
+subtitle: "TIES 2023 Reproducibility workshop"  
+author: 
+  - "Wesley Burr (Trent)"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: '%current%'
+      titleSlideClass: [top, left]
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(message = FALSE, 
+                      echo = FALSE, 
+                      warning = FALSE,
+                      fig.align = "center")
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#9F999C",
+  secondary_color = "#FFE5F3",
+  inverse_header_color = "#8F8C8E",
+  link_color = "deeppink",
+  title_slide_text_color = "#3d3d3d",
+  title_slide_background_image = "img/title-slide-background-light.png",
+  title_slide_background_position = "left",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+## Reproducible Research through Coding Habits
+
+In order to ensure research outputs are robust, and to maximize the time,
+money, blood, sweat, and tears that went into them, for future researchers
+and for society in general, it is critical that we share the underlying
+code and data. This allows for replicability of results, and is part
+of **computational reproducibility**.
+
+---
+
+## Have You Ever ...
+
+Karl -- this is very interesting ,
+however you used an old version of
+the data (n=143 rather than n=226).
+I'm really sorry you did all that
+work on the incomplete dataset.
+- Bruce
+
+*[Source](https://www.biostat.wisc.edu/~kbroman/presentations/repro_research_JSM2016.pdf) from a talk at JSM 2016 by Karl Broman - I was actually there in person*
+
+---
+
+## Have You Ever ...
+
+Reviewers come back with some positive feedback for your paper,
+but ask that you check something in one of the model runs. When you go to do
+so ... nothing matches the output in the paper. Not the figures, not the tables,
+not the results. What happened??!?
+
+---
+
+## Have You Ever ...
+
+"Your script is giving me an error when I run it on my computer."
+- Your Collaborator (*who you used to like*)
+    - or your computer-unsavvy PhD supervisor?
+
+---
+
+## Have You Ever ...
+
+```{r phd-comic, out.width="36%"}
+knitr::include_graphics("img/03-version-control-intro/phdcomicid1531.png")
+```
+
+---
+
+## So Why is Is Reproducibility in Coding Important?
+
+- your personal sanity
+
+--
+
+- the great scientific endeavor
+
+--
+
+- having things "just work", like you expect
+
+--
+
+- avoiding embarrassment
+
+---
+
+## Listen to some others ...
+
+File organization and naming is a mighty weapon against chaos
+- Jenny Bryan
+
+---
+
+##  Listen to some others ...
+
+You mostly collaborate with yourself, 
+and me-from-two-months-ago never responds to email.
+- Mark Holder
+
+---
+
+##  Listen to some others ...
+
+Dear past-Hadley: PLEASE COMMENT YOUR CODE BETTER. Love present-Hadley
+
+— [@hadleywickham](https://twitter.com/hadleywickham/status/718203628528349184)
+
+---
+
+##  Listen to some others ...
+
+The most important tool for Reproducible Research is the mindset, when starting, that the end product will be reproducible.
+- [Keith Baggerly](https://twitter.com/kwbroman/status/667735926915731457)
+
+---
+
+class: inverse
+
+## Basic Principles
+
+Basic principles
+
+Step 1: slow down and document.<br/>
+Step 2: have sympathy for your future self.<br/>
+Step 3: have a system.<br/>
+
+- [Karl Broman, UW-Madison](https://kbroman.org/Tools4RR/assets/lectures/06_org_eda_withnotes.pdf)
+
+---
+
+## Tips for Getting Started in Small Ways
+
+- force yourself to organize your current project in some kind of coherent manner
+
+--
+
+- use Git to store your materials (make them available freely, if you can!) - more soon
+
+--
+
+- create slides for your conference talks / brown bag lunches / lab meetings in R Markdown,
+Quarto, or an equivalent framework
+
+--
+
+- add one piece of the puzzle with each subsequent project
+
+--
+
+- think of all of your outputs as code (including teaching, if you do it!)
+
+---
+
+## A Personal Example
+
+I write all of my slides for my big classes in R Markdown. They are knit
+as part of a project, and the entire course is a Git repository. This has
+a number of advantages:
+
+- all slides can be publicly available
+
+--
+
+- it is very easy to update a course website (build -> commit -> push)
+
+--
+
+- I never lose old slides - they're all on GitHub
+
+--
+
+- it is trivial to cross-link from lecture to lecture, or to reuse material without making multiple copies
+
+--
+
+- I do a lot of teaching; this gives me some reinforcement 'science' skills
+while also working on that other aspect of my life
+
+---
+
+## The lectures are code!
+
+Depending on how computational your statistics/science world is, this may not
+fully sink in. What is **code**?
+
+--
+
+- all text (ASCII or UTF)
+
+--
+
+- editable in any environment, on any computer
+
+--
+
+- rendered in some way to form a final product
+
+--
+
+- trivially versionable
+
+--
+
+Compare this to, e.g., a **pptx** (Microsoft Office - Powerpoint). 
+Have you ever tried to open a pptx file in anything **but** Powerpoint? 
+Or in anything but a slide editor (e.g., Notepad)?
+
+---
+
+## Tool: usethis
+
+Building good coding habits (and everything is code!) is important. You need
+to think of every action or step you take as being something that potentially
+will cause you a problem in the future. If you find yourself doing something
+manually once ... you'll probably do it manually 100x unless you fix the
+design pattern.
+
+**usethis** is a [package for R](https://cran.r-project.org/web/packages/usethis/index.html) developed by folks at RStudio that tries to
+help with common tasks that get repeated often.
+
+---
+
+## Tool: usethis
+
+Some common tasks that can be handled with this package:
+
+- setting up Git credentials
+
+--
+
+- create a project from a repo
+
+--
+
+- open/edit R configuration files
+
+--
+
+- interact with a Git repo (branches, commits, etc.)
+
+--
+
+- work with projects or packages
+
+---
+
+## Tool: here
+
+The goal of the **here** package is to enable easy file referencing in project-oriented
+workflows. In contrast to using **setwd()**, which is fragile and dependent on the 
+way you organize your files, **here** uses the top-level directory of a project 
+to easily build paths to files.
+
+---
+
+## Tool: here
+
+```{r here, out.width="50%"}
+knitr::include_graphics("img/02-importance-of-reproducibility/02-here.png")
+```
+
+Illustration by [Allison Horst](https://github.com/allisonhorst)
+
+---
+
+## Tool: here
+
+The key to **here** is something that can be done manually, but is really important:
+machine portability. Fragile things like **setwd()** Do. Not. Work. when transferring
+data/code/analyses/projects across different computational environments. 
+
+This is especially bad when going from architecture to architecture - for example,
+from a Windows machine to a Mac OS or Linux machine, or vice versa. 
+
+Using **here** for all File Input/Output actions forces compatibility, and 
+encourages you to think about your organization structure in a way which is
+conducive to computational reproducibility. 
+
+---
+
+## Coming Up Next
+
+In the next session, we will dive into a version of what we have
+been calling **version control** called **Git** (first developed by
+Linus Torvalds, of the Linux and Linux kernel fame), and introduce the concepts 
+necessary to get started. 
+
+

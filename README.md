@@ -36,3 +36,8 @@ development + IT operations) like tools for  compute environment managment.
 - version control (Git, mostly - concepts, understanding the basics using local and remote version control) (~45 minutes)
 - integrating version control into your workflow (Git & GitHub via RStudio/Happy Git with R) (~ 60 minutes)
 - shareable compute environments (e.g., `renv`) (if time allows, ~ 45 minutes)
+
+### Links
+
+* The [Before Workshop](Before_Workshop.pdf) instructions
+* The [slide deck](TIES2023_Reproducibility.html)
